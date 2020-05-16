@@ -46,13 +46,19 @@ class _CallPageState extends State<CallPage> {
       });
       return;
     }
+    _initAgoraRtcEngine();
+    _addAgoraEventHandlers();
+    AgoraRtcEngine.enableWebSdkInteroperability(true);
+    AgoraRtcEngine.setParameters('{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}');
+    AgoraRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
+    AgoraRtcEngine.joinChannel(null, widget.channelName, null, 0);
 
-    await _initAgoraRtcEngine();
+    /*await _initAgoraRtcEngine();
     _addAgoraEventHandlers();
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
     await AgoraRtcEngine.setParameters(
         '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
-    await AgoraRtcEngine.joinChannel(null, widget.channelName, null, 0);
+    await AgoraRtcEngine.joinChannel(null, widget.channelName, null, 0);*/
   }
 
   /// Create agora sdk instance and initialize
